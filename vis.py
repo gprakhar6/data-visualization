@@ -28,7 +28,7 @@ for (df, t) in zip(dfs, str_types):
     plt.xticks(xtics, labels);
     ax.violinplot(coln);
 
-plt.savefig("violin-plot.png", dpi=256);    
+#plt.savefig("violin-plot.png", dpi=256);    
 plt.show();
 fig.clear();
 plt.close();
@@ -49,7 +49,7 @@ for (df, t) in zip(dfs, str_types):
     ax.set_xticklabels(labels);
     ax.boxplot(coln, whis=10.0);
 
-plt.savefig("box-plot.png", dpi=256);    
+#plt.savefig("box-plot.png", dpi=256);    
 plt.show();
 fig.clear();
 plt.close();
@@ -68,9 +68,23 @@ for l in labels:
     fig_n += 1;
     ax.plot(min_yrwise, max_yrwise, '*', label="cor="+"{:.2f}".format(corln));
     ax.legend(loc="upper right")    
-plt.savefig("scatter.png", dpi=256);
+#plt.savefig("scatter.png", dpi=256);
 plt.show();
 fig.clear();
 
 
     
+fig_r = 2;
+fig_c = 1;
+fig_n = 1;
+
+fig = plt.figure(figsize=(16, 8), dpi=80);
+for (df,t) in zip(dfs, str_types):
+    yrwise = df.loc[:, ['ANNUAL']].to_numpy().flatten();
+    ax = fig.add_subplot(fig_r, fig_c, fig_n);
+    fig_n += 1;
+    ax.plot(range(1901, 2013), yrwise, '*-', label=t+" Temperature");
+    ax.legend(loc="upper right")    
+#plt.savefig("line-plot.png", dpi=256);
+plt.show();
+fig.clear();
